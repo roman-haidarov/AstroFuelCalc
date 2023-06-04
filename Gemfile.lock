@@ -1,0 +1,40 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.3)
+    method_source (1.0.0)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.9)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    puma (6.3.0)
+      nio4r (~> 2.0)
+    rack (2.2.7)
+    rack-protection (2.2.4)
+      rack
+    rack-test (2.1.0)
+      rack (>= 1.3)
+    ruby2_keywords (0.0.5)
+    sinatra (2.2.4)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.4)
+      tilt (~> 2.0)
+    tilt (2.1.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  pry
+  puma
+  rack-test
+  sinatra
+
+RUBY VERSION
+   ruby 3.0.1p64
+
+BUNDLED WITH
+   2.4.6
