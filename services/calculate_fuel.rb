@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'pry'
 
 class FuelCalculator
   attr_reader :mass, :gravity
@@ -11,8 +12,8 @@ class FuelCalculator
   def perform
     fuels_mass = gravity.map do |param|
       {
-        fuel: (mass * param.last * 0.033 - 42).to_i,
-        gravity: param.last
+        fuel: (mass * param.last.to_f * 0.033 - 42).to_i,
+        gravity: param.last.to_f
       }
     end
 

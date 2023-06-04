@@ -1,14 +1,23 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'json'
+require 'pry'
 require './services/calculate_fuel'
+require_relative 'fuel_request'
 
 class MyApp < Sinatra::Base
   post '/calculate_fuel' do
-    request_body = JSON.parse(request.body.read)
-    mass = request_body['mass'].to_i
-    flight_route = request_body['flight_route']
-    result = FuelCalculator.new(mass, flight_route).perform
+    begin
+      request_body = JSON.parse(request.body.read)
+      fuel_request = FuelRequest.new(request_body.transform_keys(&:to_sym))
 
-    result.to_json
+      result = FuelCalculator.new(fuel_request.mass, fuel_request.flight_route).perform
+
+      result.to_json
+    rescue Dry::Struct::Error => e
+      status 400
+      { error: 'Invalid request parameters', details: e.message }.to_json
+    end
   end
 end
