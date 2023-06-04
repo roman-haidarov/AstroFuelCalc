@@ -1,15 +1,9 @@
 require_relative '../app'
-require 'rack/test'
-require 'pry'
+require 'spec_helper'
 
 RSpec.describe MyApp do
-  include Rack::Test::Methods
-
-  def app
-    MyApp
-  end
-
-  let!(:flight_route) {
+  let(:valid_mass) { 28801 }
+  let(:valid_flight_route) {
     [
       ["launch", 9.807], 
       ["land", 1.62],
@@ -19,11 +13,37 @@ RSpec.describe MyApp do
   }
 
   describe 'POST /calculate_fuel' do
-    it 'returns the calculated fuel' do
-      post '/calculate_fuel', { mass: 28801, flight_route: flight_route }.to_json
+    context 'successfully' do
+      it 'returns the calculated fuel' do
+        post '/calculate_fuel', { mass: valid_mass, flight_route: valid_flight_route }.to_json
 
-      expect(last_response.status).to eq(200)
-      expect(JSON.parse(last_response.body)).to eq({"all_fuel"=>38222}) 
+        expect(response_status).to eq(200)
+        expect(parsed_body).to eq({ "fuel_amount"=>29964 })
+      end
+    end
+
+    context 'failure' do
+      let(:invalid_mass) { "invalid_type" }
+      let(:invalid_flight_route) {
+        [
+          ["launch", "invalid_type"], 
+          ["land", 1.62],
+          ["launch", 1.62], 
+          ["land", 9.807]
+        ]
+      }
+
+      it 'when invalid mass' do
+        post '/calculate_fuel', { mass: invalid_mass, flight_route: valid_flight_route }.to_json
+
+        expect(response_status).to eq(400)
+      end
+
+      it 'when invalid flight_route' do
+        post '/calculate_fuel', { mass: valid_mass, flight_route: invalid_flight_route }.to_json
+
+        expect(response_status).to eq(400)
+      end
     end
   end
 end

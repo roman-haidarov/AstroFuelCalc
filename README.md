@@ -1,6 +1,6 @@
 # Установка
-1. Клонировать репозиторий: git clone https://github.com/roman-haidarov/AstroFuelCalc.git
-2. Перейти в директорию проекта: cd AstroFuelCalc
+1. Клонировать репозиторий: git clone https://github.com/roman-haidarov/astro_fuel_calc.git
+2. Перейти в директорию проекта: cd astro_fuel_calc
 3. Установить зависимости: bundle install
 # Запуск
 Запустить приложение: bundle exec puma
@@ -34,7 +34,7 @@ json
 Copy code
 ```
 {
-	"all_fuel": 38222
+	"fuel_amount": 38222
 }
 ```
 # Параметры запроса
