@@ -10,7 +10,7 @@ class MyApp < Sinatra::Base
   post '/calculate_fuel' do
     fuel_request = FuelRequest.new(request_body)
     FuelCalculator.new(mass: fuel_request.mass, 
-                       gravity: fuel_request.flight_route)
+                       space_way: fuel_request.flight_route)
                   .call.to_json
   rescue JSON::ParserError => e
     status 400

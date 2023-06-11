@@ -11,10 +11,10 @@ RSpec.describe FuelCalculator do
         ["land", 9.807]
       ]
     }
-    let(:expected_hash) { { fuel_amount: 29964 } }
+    let(:expected_hash) { 36752 }
 
     it 'returns the calculated fuel' do
-      result = described_class.new(mass: mass, gravity: flight_route).call
+      result = described_class.new(mass: mass, space_way: flight_route).call
       
       expect(result).to eq(expected_hash)
     end

@@ -18,7 +18,7 @@ RSpec.describe MyApp do
         post '/calculate_fuel', { mass: valid_mass, flight_route: valid_flight_route }.to_json
 
         expect(response_status).to eq(200)
-        expect(parsed_body).to eq({ "fuel_amount"=>29964 })
+        expect(parsed_body).to eq(36752)
       end
     end
 
